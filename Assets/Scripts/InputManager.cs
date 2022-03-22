@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class InputManager : MonoBehaviour
 
     public float screenWidth;
 
+    private MMFeedbacks _inputFeedbacks;
+
     private void Awake()
     {
         if (Instance == null)
@@ -18,23 +21,29 @@ public class InputManager : MonoBehaviour
         else
             Destroy(gameObject);
 
+        _inputFeedbacks = GetComponentInChildren<MMFeedbacks>();
+
         screenWidth = Screen.width;
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > screenWidth / 2 && GameManager.Instance.gameActive)
+        if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > screenWidth / 2 && GameManager.Instance.gameActive
+            || (Input.GetButtonDown("Right") && GameManager.Instance.gameActive))
         {
             rightInput = true;
+            _inputFeedbacks.PlayFeedbacks();
         }
         else
         {
             rightInput = false;
         }
         
-        if (Input.GetMouseButtonDown(0) && Input.mousePosition.x < screenWidth / 2 && GameManager.Instance.gameActive)
+        if (Input.GetMouseButtonDown(0) && Input.mousePosition.x < screenWidth / 2 && GameManager.Instance.gameActive
+            || (Input.GetButtonDown("Left") && GameManager.Instance.gameActive))
         {
             leftInput = true;
+            _inputFeedbacks.PlayFeedbacks();
         }
         else
         {

@@ -48,14 +48,14 @@ public class GameManager : MonoBehaviour
         
         if (!gameActive && !gameOver && !readyToContinue)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Right") || Input.GetButtonDown("Left"))
             {
                 StartGame();
                 uiInstructionsPanel.SetActive(false);
             }
         }
         
-        if(readyToContinue && Input.GetMouseButtonDown(0))
+        if(readyToContinue && (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Right") || Input.GetButtonDown("Left")))
             ResumeGame();
     }
 
