@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using MoreMountains.Feedbacks;
+﻿using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour

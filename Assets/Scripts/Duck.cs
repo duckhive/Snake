@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -96,7 +94,6 @@ public class Duck : MonoBehaviour
             {
                 _direction = -Vector3.forward;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
-
             }
             if (InputManager.Instance.leftInput)
             {
@@ -120,3 +117,4 @@ public class Duck : MonoBehaviour
         }
     }
 }
+
