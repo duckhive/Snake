@@ -7,6 +7,18 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [SerializeField] private Duck duck;
+    [SerializeField] private float easy;
+    [SerializeField] private float medium;
+    [SerializeField] private float hard;
+    [SerializeField] private Difficulty difficulty;
+    [SerializeField] private bool paused;
+
+        public enum Difficulty
+    {
+        easy,
+        medium,
+        hard
+    }
     
     public Transform segmentPrefab;
     
@@ -15,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject UIGameOverPanel;
     public GameObject uiInstructionsPanel;
+    public GameObject uiPausePanel;
 
     public bool gameActive;
     public bool gameOver;
@@ -43,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         UIScoreText.text = $"Score: {score}";
         
-        if (!gameActive && !gameOver && !readyToContinue)
+        if (!gameActive && !gameOver && !readyToContinue && !paused)
         {
             if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Right") || Input.GetButtonDown("Left"))
             {
@@ -93,6 +106,7 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         uiInstructionsPanel.SetActive(true);
         PlaylistManager.Instance.PlayRandomTrack();
+        UnPauseGame();
     }
 
     public void StartGame()
@@ -106,6 +120,42 @@ public class GameManager : MonoBehaviour
     {
         gameActive = true;
         readyToContinue = false;
+    }
+
+    public void PauseGame()
+    {
+        uiPausePanel.SetActive(true);
+        gameActive = false;
+        paused = true;
+        Time.timeScale = 0;
+    }
+
+    public void UnPauseGame()
+    {
+        uiPausePanel.SetActive(false);
+        paused = false;
+        
+        if (difficulty == Difficulty.easy)
+            Time.timeScale = easy;
+        if (difficulty == Difficulty.medium)
+            Time.timeScale = medium;
+        if (difficulty == Difficulty.hard)
+            Time.timeScale = hard;
+    }
+
+    public void SetToEasy()
+    {
+        difficulty = Difficulty.easy;
+    }
+    
+    public void SetToMedium()
+    {
+        difficulty = Difficulty.medium;
+    }
+    
+    public void SetToHard()
+    {
+        difficulty = Difficulty.hard;
     }
 
     public void ContinueGame()

@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
 
     public float screenWidth;
 
-    private MMFeedbacks _inputFeedbacks;
+    [SerializeField] MMFeedbacks _inputFeedbacks;
 
     private void Awake()
     {
@@ -18,9 +18,7 @@ public class InputManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
-
-        _inputFeedbacks = GetComponentInChildren<MMFeedbacks>();
-
+        
         screenWidth = Screen.width;
     }
 

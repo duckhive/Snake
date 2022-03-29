@@ -13,7 +13,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     private void Awake()
     {   
 #if UNITY_IOS
-        _adUnitId = _iOSAdUnitId;
+        _adUnitId = iOSAdUnitId;
 #elif UNITY_ANDROID
         _adUnitId = androidAdUnitId;
 #endif
